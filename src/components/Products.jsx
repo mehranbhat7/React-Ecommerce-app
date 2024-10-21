@@ -44,7 +44,7 @@ const Products = () => {
             >
               <Card
                 sx={{
-                  maxwidth: "300px", // Fixed width
+                  maxwidth: "300px",
                   height: "250px",
                 }}
               >
