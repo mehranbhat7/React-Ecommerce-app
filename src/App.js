@@ -19,6 +19,7 @@ import ProductDetails from "./components/ProductDetails";
 import Notfound from "./Notfound";
 
 function App() {
+  const [cartCount, setCartCount] = useState(0);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const toggleDrawer = (open) => (event) => {
@@ -96,7 +97,23 @@ function App() {
               aria-label="cart"
               onClick={toggleDrawer(true)}
             >
-              <ShoppingCartIcon fontSize="large" />
+              <div style={{ position: "relative" }}>
+                <ShoppingCartIcon fontSize="large" />
+                <span
+                  style={{
+                    position: "absolute",
+                    top: -8,
+                    right: -8,
+                    backgroundColor: "red",
+                    borderRadius: "50%",
+                    padding: "4px 8px",
+                    fontSize: "14px",
+                    color: "white",
+                  }}
+                >
+                  {cartCount}
+                </span>
+              </div>
             </IconButton>
           </Toolbar>
         </AppBar>
@@ -113,7 +130,10 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Products />} />
-        <Route path="/products/:id" element={<ProductDetails />} />
+        <Route
+          path="/products/:id"
+          element={<ProductDetails setCartCount={setCartCount} />}
+        />
         <Route path="*" element={<Notfound />} />
       </Routes>
     </>

@@ -10,7 +10,7 @@ import CardActionArea from "@mui/material/CardActionArea";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
-const ProductDetails = () => {
+const ProductDetails = ({ setCartCount }) => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
 
@@ -24,7 +24,10 @@ const ProductDetails = () => {
     return null;
   }
   function handleBuy() {
-    alert("Product bought successfully!");
+    alert("Product purchased");
+  }
+  function handleAddToCart() {
+    setCartCount((prevCount) => prevCount + 1);
   }
 
   return (
@@ -65,7 +68,7 @@ const ProductDetails = () => {
           <Button variant="contained" color="success" onClick={handleBuy}>
             Buy Now
           </Button>
-          <Button variant="outlined" color="error">
+          <Button variant="outlined" color="error" onClick={handleAddToCart}>
             Add to Cart
           </Button>
         </Stack>
