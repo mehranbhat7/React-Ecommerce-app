@@ -76,7 +76,7 @@ function App() {
               color="inherit"
               aria-label="menu"
               sx={{ mr: 2 }}
-              onClick={toggleDrawer(true)} // Open drawer when clicking on menu icon
+              onClick={toggleDrawer(true)}
             >
               <MenuIcon />
             </IconButton>
@@ -90,12 +90,11 @@ function App() {
               RedStag Labs
             </Typography>
 
-            {/* Cart Icon to open drawer */}
             <IconButton
               size="large"
               color="inherit"
               aria-label="cart"
-              onClick={toggleDrawer(true)} // Open drawer when clicking on cart icon
+              onClick={toggleDrawer(true)}
             >
               <ShoppingCartIcon fontSize="large" />
             </IconButton>
@@ -103,7 +102,6 @@ function App() {
         </AppBar>
       </Box>
 
-      {/* Drawer Component */}
       <SwipeableDrawer
         anchor="right"
         open={drawerOpen}
@@ -113,7 +111,6 @@ function App() {
         {productList}
       </SwipeableDrawer>
 
-      {/* Routes */}
       <Routes>
         <Route path="/" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetails />} />

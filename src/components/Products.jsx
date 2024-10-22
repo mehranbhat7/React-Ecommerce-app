@@ -7,6 +7,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
+import Button from "@mui/material/Button";
 
 const Products = () => {
   const [data, setData] = useState(null);
@@ -22,6 +23,9 @@ const Products = () => {
   }
   if (data === null) {
     return null;
+  }
+  function handleBuy() {
+    alert("Product bought successfully!");
   }
   return (
     <>
@@ -53,7 +57,8 @@ const Products = () => {
               <Card
                 sx={{
                   maxwidth: "300px",
-                  height: "250px",
+                  height: "300px",
+                  padding: "10px",
                 }}
               >
                 <CardActionArea>
@@ -72,8 +77,28 @@ const Products = () => {
                       variant="body2"
                       sx={{ color: "text.secondary" }}
                     >
-                      {ele.title}
+                      {ele.title.split(" ").slice(0, 4).join(" ") +
+                        (ele.title.split(" ").length > 7 ? "...." : "")}
                     </Typography>
+                    <div style={{ marginTop: "25px" }}>
+                      <Button
+                        variant="contained"
+                        color="success"
+                        onClick={handleBuy}
+                        size="small"
+                        style={{ fontSize: "10px", marginRight: "30px" }}
+                      >
+                        Buy Now
+                      </Button>
+                      <Button
+                        variant="outlined"
+                        color="error"
+                        size="small"
+                        style={{ fontSize: "10px" }}
+                      >
+                        Add to Cart
+                      </Button>
+                    </div>
                   </CardContent>
                 </CardActionArea>
               </Card>
