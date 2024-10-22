@@ -25,7 +25,15 @@ const Products = () => {
   }
   return (
     <>
-      <h1>Products</h1>
+      <h1
+        style={{
+          textAlign: "center",
+          color: "blue",
+          textDecoration: "underline",
+        }}
+      >
+        Products
+      </h1>
       <div
         style={{
           display: "flex",
