@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -9,10 +8,13 @@ import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 const ProductDetails = ({ setCartCount, addToCart }) => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [open, setOpen] = useState(false); // Snackbar state
 
   useEffect(() => {
     axios.get(`https://fakestoreapi.com/products/${id}`).then((res) => {
@@ -23,13 +25,22 @@ const ProductDetails = ({ setCartCount, addToCart }) => {
   if (product === null) {
     return null;
   }
+
   function handleBuy() {
-    alert("Product purchased");
+    setOpen(true);
   }
+
   function handleAddToCart() {
     addToCart(product);
     setCartCount((prevCount) => prevCount + 1);
   }
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
 
   return (
     <div style={{ display: "flex", justifyContent: "center", padding: "30px" }}>
@@ -69,6 +80,17 @@ const ProductDetails = ({ setCartCount, addToCart }) => {
           </Button>
         </Stack>
       </Card>
+
+      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+        <Alert
+          onClose={handleClose}
+          severity="success"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          Product purchased successfully!
+        </Alert>
+      </Snackbar>
     </div>
   );
 };
