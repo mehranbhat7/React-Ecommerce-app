@@ -97,6 +97,11 @@ function App() {
       // setCartCount((prevCount) => prevCount + 1);
     }
   };
+  const removeFromCart = (itemId) => {
+    const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
+    setCartItems(updatedCartItems);
+    setCartCount(updatedCartItems.length);
+  };
 
   const handleSnackbarClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -116,6 +121,17 @@ function App() {
         {cartItems.map((item, index) => (
           <ListItem key={index}>
             <ListItemText primary={item.title} secondary={`$${item.price}`} />
+            <button
+              onClick={() => removeFromCart(item.id)}
+              style={{
+                backgroundColor: "blue",
+                borderRadius: "10px",
+                padding: "5px",
+                color: "white",
+              }}
+            >
+              Remove
+            </button>
           </ListItem>
         ))}
       </List>

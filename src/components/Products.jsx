@@ -65,7 +65,13 @@ const Products = ({ searchTerm }) => {
                     alt={product.title}
                   />
                   <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="div"
+                      color="green"
+                      fontSize={25}
+                    >
                       ${product.price}
                     </Typography>
                     <Typography
