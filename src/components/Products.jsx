@@ -24,9 +24,9 @@ const Products = () => {
   if (data === null) {
     return null;
   }
-  function handleBuy() {
-    alert("Product bought successfully!");
-  }
+  // function handleBuy() {
+  //   alert("Product bought successfully!");
+  // }
   return (
     <>
       <h1
@@ -80,26 +80,26 @@ const Products = () => {
                       {ele.title.split(" ").slice(0, 4).join(" ") +
                         (ele.title.split(" ").length > 7 ? "...." : "")}
                     </Typography>
-                    <div style={{ marginTop: "25px" }}>
-                      <Button
-                        variant="contained"
-                        color="success"
-                        onClick={handleBuy}
-                        size="small"
-                        style={{ fontSize: "10px", marginRight: "30px" }}
-                      >
-                        Buy Now
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        color="error"
-                        size="small"
-                        style={{ fontSize: "10px" }}
-                      >
-                        Add to Cart
-                      </Button>
-                    </div>
                   </CardContent>
+                  <div style={{ marginTop: "25px" }}>
+                    <Button
+                      variant="contained"
+                      color="success"
+                      // onClick={handleBuy}
+                      size="small"
+                      style={{ fontSize: "10px", marginRight: "30px" }}
+                    >
+                      View
+                    </Button>
+                    {/* <Button
+                      variant="outlined"
+                      color="error"
+                      size="small"
+                      style={{ fontSize: "10px" }}
+                    >
+                      Add to Cart
+                    </Button> */}
+                  </div>
                 </CardActionArea>
               </Card>
             </div>

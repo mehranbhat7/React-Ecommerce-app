@@ -10,7 +10,7 @@ import CardActionArea from "@mui/material/CardActionArea";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
-const ProductDetails = ({ setCartCount }) => {
+const ProductDetails = ({ setCartCount, addToCart }) => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
 
@@ -27,16 +27,12 @@ const ProductDetails = ({ setCartCount }) => {
     alert("Product purchased");
   }
   function handleAddToCart() {
+    addToCart(product);
     setCartCount((prevCount) => prevCount + 1);
   }
 
   return (
     <div style={{ display: "flex", justifyContent: "center", padding: "30px" }}>
-      {/* <h2>{product.title}</h2>
-      <img src={product.image} alt={product.title} style={{ width: "200px" }} />
-      <p>{product.description}</p>
-      <p>Price: ${product.price}</p>
-      <p>Category: {product.category}</p> */}
       <Card
         sx={{ maxWidth: 745, minHeight: 300, maxHeight: 700, padding: "30px" }}
       >
