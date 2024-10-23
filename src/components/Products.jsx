@@ -24,10 +24,9 @@ const Products = ({ searchTerm }) => {
   };
 
   if (data === null) {
-    return null; // You might want to add a loading indicator here
+    return null;
   }
 
-  // Filter products based on the searchTerm
   const filteredProducts = data.filter((product) =>
     product.title.toLowerCase().includes(searchTerm.toLowerCase())
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -61,13 +61,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+const ItemsFromLocalstogare = JSON.parse(localStorage.getItem("cart") || "[]");
 
 function App() {
   const [cartCount, setCartCount] = useState(0);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(ItemsFromLocalstogare);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  useEffect(() => {
+    setCartCount(cartItems.length);
+  }, [cartItems]);
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -86,7 +94,7 @@ function App() {
       setSnackbarOpen(true);
     } else {
       setCartItems((prevItems) => [...prevItems, item]);
-      setCartCount((prevCount) => prevCount + 1);
+      // setCartCount((prevCount) => prevCount + 1);
     }
   };
 
