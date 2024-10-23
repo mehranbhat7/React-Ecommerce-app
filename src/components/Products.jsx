@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-// import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -9,35 +8,32 @@ import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import Button from "@mui/material/Button";
 
-const Products = () => {
+const Products = ({ searchTerm }) => {
   const [data, setData] = useState(null);
+
   useEffect(() => {
-    axios.get("https://fakestoreapi.com/products").then((ele) => {
-      setData(ele.data);
+    axios.get("https://fakestoreapi.com/products").then((response) => {
+      setData(response.data);
     });
   }, []);
 
   const navigate = useNavigate();
-  function handlee(ele) {
-    navigate(`/products/${ele.id}`);
-  }
+
+  const handlee = (product) => {
+    navigate(`/products/${product.id}`);
+  };
+
   if (data === null) {
-    return null;
+    return null; // You might want to add a loading indicator here
   }
-  // function handleBuy() {
-  //   alert("Product bought successfully!");
-  // }
+
+  // Filter products based on the searchTerm
+  const filteredProducts = data.filter((product) =>
+    product.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <>
-      {/* <h1
-        style={{
-          textAlign: "center",
-          color: "blue",
-          textDecoration: "underline",
-        }}
-      >
-        Products
-      </h1> */}
       <div
         style={{
           display: "flex",
@@ -47,16 +43,16 @@ const Products = () => {
           padding: "10px",
         }}
       >
-        {data.map((ele) => {
+        {filteredProducts.map((product) => {
           return (
             <div
-              key={ele.id}
+              key={product.id}
               style={{ flex: "0 0 23%", maxWidth: "25%" }}
-              onClick={() => handlee(ele)}
+              onClick={() => handlee(product)}
             >
               <Card
                 sx={{
-                  maxwidth: "300px",
+                  maxWidth: "300px",
                   height: "300px",
                   padding: "10px",
                 }}
@@ -66,39 +62,30 @@ const Products = () => {
                     style={{ objectFit: "contain" }}
                     component="img"
                     height="140"
-                    image={ele.image}
-                    alt="green iguana"
+                    image={product.image}
+                    alt={product.title}
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                      ${ele.price}
+                      ${product.price}
                     </Typography>
                     <Typography
                       variant="body2"
                       sx={{ color: "text.secondary" }}
                     >
-                      {ele.title.split(" ").slice(0, 4).join(" ") +
-                        (ele.title.split(" ").length > 7 ? "...." : "")}
+                      {product.title.split(" ").slice(0, 4).join(" ") +
+                        (product.title.split(" ").length > 7 ? "...." : "")}
                     </Typography>
                   </CardContent>
                   <div style={{ marginTop: "25px" }}>
                     <Button
                       variant="contained"
                       color="success"
-                      // onClick={handleBuy}
                       size="small"
                       style={{ fontSize: "10px", marginRight: "30px" }}
                     >
                       View
                     </Button>
-                    {/* <Button
-                      variant="outlined"
-                      color="error"
-                      size="small"
-                      style={{ fontSize: "10px" }}
-                    >
-                      Add to Cart
-                    </Button> */}
                   </div>
                 </CardActionArea>
               </Card>

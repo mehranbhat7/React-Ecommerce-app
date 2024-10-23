@@ -67,6 +67,7 @@ function App() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -139,6 +140,8 @@ function App() {
               <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
             </Search>
 
@@ -180,7 +183,7 @@ function App() {
       </SwipeableDrawer>
 
       <Routes>
-        <Route path="/" element={<Products />} />
+        <Route path="/" element={<Products searchTerm={searchTerm} />} />
         <Route
           path="/products/:id"
           element={
