@@ -78,11 +78,7 @@ function App() {
   }, [cartItems]);
 
   const toggleDrawer = (open) => (event) => {
-    if (
-      event &&
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
+    if (event && event.type === "keydown") {
       return;
     }
     setDrawerOpen(open);
@@ -120,22 +116,37 @@ function App() {
       <List>
         {cartItems.map((item, index) => (
           <ListItem key={index}>
-            <ListItemText primary={item.title} secondary={`$${item.price}`} />
+            <ListItemText
+              style={{
+                fontWeight: "bold",
+                fontSize: "1rem",
+                lineHeight: "1.5",
+              }}
+              primary={item.title}
+              secondary={`$${item.price}`}
+            />
             <button
               onClick={() => removeFromCart(item.id)}
               style={{
-                backgroundColor: "blue",
-                borderRadius: "10px",
-                padding: "5px",
+                backgroundColor: "#007BFF",
+                borderRadius: "5px",
+                padding: "8px 12px",
                 color: "white",
+                border: "none",
+                cursor: "pointer",
+                transition: "background-color 0.3s ease",
               }}
             >
               Remove
             </button>
           </ListItem>
         ))}
+        <Divider />
+        <h4 style={{ color: "green", fontSize: "20px", marginLeft: "10px" }}>
+          Total Price: $
+          {cartItems.reduce((total, item) => total + parseFloat(item.price), 0)}
+        </h4>
       </List>
-      <Divider />
     </Box>
   );
 

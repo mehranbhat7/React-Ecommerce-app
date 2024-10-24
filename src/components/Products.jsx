@@ -82,11 +82,11 @@ const Products = ({ searchTerm }) => {
                         (product.title.split(" ").length > 7 ? "...." : "")}
                     </Typography>
                   </CardContent>
-                  <div style={{ marginTop: "25px" }}>
+                  <div style={{ marginTop: "25px", marginLeft: "17px" }}>
                     <Button
                       variant="contained"
                       color="success"
-                      size="small"
+                      size="large"
                       style={{ fontSize: "10px", marginRight: "30px" }}
                     >
                       View
